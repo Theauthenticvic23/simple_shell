@@ -1,12 +1,12 @@
 #include "cyshell.h"
 
 /**
- * fget_env - returns the string array copy of our environ
+ * vget_env - returns the string array copy of our environ
  * @finfo: Structure containing potential arguments. Used to maintain
  *          constant function prototype.
  * Return: Always 0
  */
-char **fget_env(finfo_a *finfo)
+char **vget_env(finfo_a *finfo)
 {
 	if (!(*finfo).environ || (*finfo).env_changed)
 	{

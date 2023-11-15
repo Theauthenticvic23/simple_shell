@@ -37,7 +37,7 @@ int main(int ac, char **av)
 		}
 		(*finfo).readfd = fd;
 	}
-	fpop_env_list(finfo);
+	vpop_env_list(finfo);
 	read_fhistory(finfo);
 	shell(finfo, av);
 	return (EXIT_SUCCESS);

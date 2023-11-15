@@ -11,7 +11,7 @@ char *get_fhistory_file(finfo_a *finfo)
 {
 	char *buf, *fdir;
 
-	fdir = _fgetenv(finfo, "HOME=");
+	fdir = _vgetenv(finfo, "HOME=");
 	if (!fdir)
 		return (NULL);
 	buf = malloc(sizeof(char) * (_strlen(fdir) + _strlen(FHIST_FILE) + 2));

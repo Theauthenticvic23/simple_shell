@@ -1,13 +1,13 @@
 #include "cyshell.h"
 
 /**
- * _fhistory - displays the history list, one command by line, preceded
+ * _vhistory - displays the history list, one command by line, preceded
  *              with line numbers, starting at 0.
  * @finfo: Structure containing potential arguments. Used to maintain
  *        constant function prototype.
  *  Return: Always 0
  */
-int _fhistory(finfo_a *finfo)
+int _vhistory(finfo_a *finfo)
 {
 	_fprintlist((*finfo).history);
 	return (0);
@@ -37,13 +37,13 @@ int unset_falias(finfo_a *finfo, char *fstr)
 }
 
 /**
- * set_falias - sets valias to string
+ * set_valias - sets valias to string
  * @finfo: parameter struct
  * @fstr: the string valias
  *
  * Return: Always 0 on success, 1 on error
  */
-int set_falias(finfo_a *finfo, char *fstr)
+int set_valias(finfo_a *finfo, char *fstr)
 {
 	char *f;
 
@@ -58,12 +58,12 @@ int set_falias(finfo_a *finfo, char *fstr)
 }
 
 /**
- * print_falias - prints an valias string
+ * print_valias - prints an valias string
  * @node: the valias node
  *
  * Return: Always 0 on success, 1 on error
  */
-int print_falias(list_t *node)
+int print_valias(list_t *node)
 {
 	char *f = NULL, *a = NULL;
 

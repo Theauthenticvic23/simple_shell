@@ -1,12 +1,12 @@
 #include "cyshell.h"
 
 /**
- * _myfalias - mimics the valias builtin (man valias)
+ * _myvalias - mimics the valias builtin (man valias)
  * @finfo: Structure containing potential arguments. Used to maintain
  *          constant function prototype.
  *  Return: Always 0
  */
-int _myfalias(finfo_a *finfo)
+int _myvalias(finfo_a *finfo)
 {
 	int i = 0;
 	char *f = NULL;
@@ -17,7 +17,7 @@ int _myfalias(finfo_a *finfo)
 		node = (*finfo).valias;
 		while (node)
 		{
-			print_falias(node);
+			print_valias(node);
 			node = (*node).next;
 		}
 		return (0);
@@ -26,22 +26,22 @@ int _myfalias(finfo_a *finfo)
 	{
 		f = _strchr((*finfo).argv[i], '=');
 		if (f)
-			set_falias(finfo, (*finfo).argv[i]);
+			set_valias(finfo, (*finfo).argv[i]);
 		else
-			print_falias(fnode_starts_with((*finfo).valias, (*finfo).argv[i], '='));
+			print_valias(fnode_starts_with((*finfo).valias, (*finfo).argv[i], '='));
 	}
 
 	return (0);
 }
 
 /**
- * _fexit - exits the shell
+ * _vexit - exits the shell
  * @finfo: Structure containing potential arguments. Used to maintain
  *          constant function prototype.
  *  Return: exits with a given exit status
  *         (0) if finfo.argv[0] != "exit"
  */
-int _fexit(finfo_a *finfo)
+int _vexit(finfo_a *finfo)
 {
 	int fexitcheck;
 
@@ -64,12 +64,12 @@ int _fexit(finfo_a *finfo)
 }
 
 /**
- * _fcd - changes the current directory of the process
+ * _vcd - changes the current directory of the process
  * @finfo: Structure containing potential arguments. Used to maintain
  *          constant function prototype.
  *  Return: Always 0
  */
-int _fcd(finfo_a *finfo)
+int _vcd(finfo_a *finfo)
 {
 	char *s, *fdir, buffer[1024];
 	int chdir_ret;
@@ -79,24 +79,24 @@ int _fcd(finfo_a *finfo)
 		_puts("TODO: >>getcwd failure emsg here<<\n");
 	if (!(*finfo).argv[1])
 	{
-		fdir = _fgetenv(finfo, "HOME=");
+		fdir = _vgetenv(finfo, "HOME=");
 		if (!fdir)
 			chdir_ret = /* TODO: what should this be? */
-				chdir((fdir = _fgetenv(finfo, "PWD=")) ? fdir : "/");
+				chdir((fdir = _vgetenv(finfo, "PWD=")) ? fdir : "/");
 		else
 			chdir_ret = chdir(fdir);
 	}
 	else if (_strcmp((*finfo).argv[1], "-") == 0)
 	{
-		if (!_fgetenv(finfo, "OLDPWD="))
+		if (!_vgetenv(finfo, "OLDPWD="))
 		{
 			_puts(s);
 			_putchar('\n');
 			return (1);
 		}
-		_puts(_fgetenv(finfo, "OLDPWD=")), _putchar('\n');
+		_puts(_vgetenv(finfo, "OLDPWD=")), _putchar('\n');
 		chdir_ret = /* TODO: what should this be? */
-			chdir((fdir = _fgetenv(finfo, "OLDPWD=")) ? fdir : "/");
+			chdir((fdir = _vgetenv(finfo, "OLDPWD=")) ? fdir : "/");
 	}
 	else
 		chdir_ret = chdir((*finfo).argv[1]);
@@ -107,19 +107,19 @@ int _fcd(finfo_a *finfo)
 	}
 	else
 	{
-		_fsetenv(finfo, "OLDPWD", _fgetenv(finfo, "PWD="));
+		_fsetenv(finfo, "OLDPWD", _vgetenv(finfo, "PWD="));
 		_fsetenv(finfo, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
 }
 
 /**
- * _fhelp - changes the current directory of the process
+ * _vhelp - changes the current directory of the process
  * @finfo: Structure containing potential arguments. Used to maintain
  *          constant function prototype.
  *  Return: Always 0
  */
-int _fhelp(finfo_a *finfo)
+int _vhelp(finfo_a *finfo)
 {
 	char **arg_array;
 

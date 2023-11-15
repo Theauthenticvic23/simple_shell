@@ -22,7 +22,7 @@ ssize_t input_buf(finfo_a *finfo, char **buf, size_t *len)
 #if FUSE_GET
 		r = getline(buf, &len_p, stdin);
 #else
-		r = _fgetline(finfo, buf, &len_p);
+		r = _vgetline(finfo, buf, &len_p);
 #endif
 		if (r > 0)
 		{
@@ -85,8 +85,8 @@ ssize_t get_input(finfo_a *finfo)
 		return (_strlen(f)); /* return length of current command */
 	}
 
-	*buf_p = buf; /* else not a chain, pass back buffer from _fgetline() */
-	return (r); /* return length of buffer from _fgetline() */
+	*buf_p = buf; /* else not a chain, pass back buffer from _vgetline() */
+	return (r); /* return length of buffer from _vgetline() */
 }
 
 /**
@@ -110,14 +110,14 @@ ssize_t read_buf(finfo_a *finfo, char *buf, size_t *i)
 }
 
 /**
- * _fgetline - gets the next line of input from STDIN
+ * _vgetline - gets the next line of input from STDIN
  * @finfo: parameter struct
  * @ptr: address of pointer to buffer, preallocated or NULL
  * @length: size of preallocated ptr buffer if not NULL
  *
  * Return: s
  */
-int _fgetline(finfo_a *finfo, char **ptr, size_t *length)
+int _vgetline(finfo_a *finfo, char **ptr, size_t *length)
 {
 	static char buf[FBUF_SIZE];
 	static size_t i, len;

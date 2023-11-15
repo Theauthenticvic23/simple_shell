@@ -56,14 +56,14 @@ int find_builtin(finfo_a *finfo)
 {
 	int i, built_in_ret = -1;
 	builtin_table builtintbl[] = {
-		{"exit", _fexit},
-		{"env", _fenv},
-		{"help", _fhelp},
-		{"history", _fhistory},
-		{"setenv", _fmsetenv},
-		{"unsetenv", _funsetenv},
-		{"cd", _fcd},
-		{"alias", _myfalias},
+		{"exit", _vexit},
+		{"env", _venv},
+		{"help", _vhelp},
+		{"history", _vhistory},
+		{"setenv", _vmsetenv},
+		{"unsetenv", _vunsetenv},
+		{"cd", _vcd},
+		{"alias", _myvalias},
 		{NULL, NULL}
 	};
 
@@ -100,7 +100,7 @@ void find_cmd(finfo_a *finfo)
 	if (!k)
 		return;
 
-	path = find_fpath(finfo, _fgetenv(finfo, "PATH="), finfo->argv[0]);
+	path = find_fpath(finfo, _vgetenv(finfo, "PATH="), finfo->argv[0]);
 	if (path)
 	{
 		finfo->path = path;
@@ -108,7 +108,7 @@ void find_cmd(finfo_a *finfo)
 	}
 	else
 	{
-		if ((interact(finfo) || _fgetenv(finfo, "PATH=")
+		if ((interact(finfo) || _vgetenv(finfo, "PATH=")
 			|| finfo->argv[0][0] == '/') && fcmd(finfo, finfo->argv[0]))
 			fork_cmd(finfo);
 		else if (*(finfo->arg) != '\n' && _strcmp(finfo->argv[0], "/") != 0)
@@ -137,7 +137,7 @@ void fork_cmd(finfo_a *finfo)
 	}
 	if (child_pid == 0)
 	{
-		if (execve((*finfo).path, (*finfo).argv, fget_env(finfo)) == -1)
+		if (execve((*finfo).path, (*finfo).argv, vget_env(finfo)) == -1)
 		{
 			free_finfo(finfo, 1);
 			if (errno == EACCES)

@@ -28,8 +28,8 @@
 #define FCONV_LOW	1
 #define FCONV_UNS	2
 
-/* 1 for default system getline() else use the custom _fgetline */
-#define FUSE_GET 1
+/* 1 for default system getline() else use the custom _vgetline */
+#define FUSE_GET 0
 
 #define FHIST_FILE	".simple_shell_fhistory"
 #define FHIST_MAX	4096
@@ -162,19 +162,19 @@ char *convert_number(long int, int, int);
 void remove_comments(char *);
 
 /* fcusbuilt.c */
-int _fexit(finfo_a *);
-int _fcd(finfo_a *);
-int _fhelp(finfo_a *);
-int _myfalias(finfo_a *);
+int _vexit(finfo_a *);
+int _vcd(finfo_a *);
+int _vhelp(finfo_a *);
+int _myvalias(finfo_a *);
 
 /* fbuilt.c */
-int _fhistory(finfo_a *);
-int print_falias(list_t *node);
-int set_falias(finfo_a *finfo, char *fstr);
+int _vhistory(finfo_a *);
+int print_valias(list_t *node);
+int set_valias(finfo_a *finfo, char *fstr);
 
 /* fgetline.c */
 ssize_t get_input(finfo_a *);
-int _fgetline(finfo_a *, char **, size_t *);
+int _vgetline(finfo_a *, char **, size_t *);
 
 
 /* fainfo.c */
@@ -184,14 +184,14 @@ void set_finfo(finfo_a *, char **);
 void free_finfo(finfo_a *, int);
 
 /* venv.c */
-char *_fgetenv(finfo_a *, const char *);
-int _fenv(finfo_a *);
-int _fmsetenv(finfo_a *);
-int _funsetenv(finfo_a *);
-int fpop_env_list(finfo_a *);
+char *_vgetenv(finfo_a *, const char *);
+int _venv(finfo_a *);
+int _vmsetenv(finfo_a *);
+int _vunsetenv(finfo_a *);
+int vpop_env_list(finfo_a *);
 
 /* fgetenv.c */
-char **fget_env(finfo_a *);
+char **vget_env(finfo_a *);
 int f_unsetenv(finfo_a *, char *);
 int _fsetenv(finfo_a *, char *, char *);
 
