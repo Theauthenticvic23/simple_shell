@@ -1,7 +1,7 @@
-#include "fashell.h"
+#include "cyshell.h"
 
 /**
- * _myfalias - mimics the falias builtin (man falias)
+ * _myfalias - mimics the valias builtin (man valias)
  * @finfo: Structure containing potential arguments. Used to maintain
  *          constant function prototype.
  *  Return: Always 0
@@ -14,7 +14,7 @@ int _myfalias(finfo_a *finfo)
 
 	if ((*finfo).argc == 1)
 	{
-		node = (*finfo).falias;
+		node = (*finfo).valias;
 		while (node)
 		{
 			print_falias(node);
@@ -28,7 +28,7 @@ int _myfalias(finfo_a *finfo)
 		if (f)
 			set_falias(finfo, (*finfo).argv[i]);
 		else
-			print_falias(fnode_starts_with((*finfo).falias, (*finfo).argv[i], '='));
+			print_falias(fnode_starts_with((*finfo).valias, (*finfo).argv[i], '='));
 	}
 
 	return (0);

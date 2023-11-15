@@ -1,4 +1,4 @@
-#include "fashell.h"
+#include "cyshell.h"
 
 /**
  * _fhistory - displays the history list, one command by line, preceded
@@ -14,9 +14,9 @@ int _fhistory(finfo_a *finfo)
 }
 
 /**
- * unset_falias - sets falias to string
+ * unset_falias - sets valias to string
  * @finfo: parameter struct
- * @fstr: the string falias
+ * @fstr: the string valias
  *
  * Return: Always 0 on success, 1 on error
  */
@@ -30,16 +30,16 @@ int unset_falias(finfo_a *finfo, char *fstr)
 		return (1);
 	c = *f;
 	*f = 0;
-	fret = fdelete_node_at_ind(&((*finfo).falias),
-		get_node_ind((*finfo).falias, fnode_starts_with((*finfo).falias, fstr, -1)));
+	fret = fdelete_node_at_ind(&((*finfo).valias),
+		get_node_ind((*finfo).valias, fnode_starts_with((*finfo).valias, fstr, -1)));
 	*f = c;
 	return (fret);
 }
 
 /**
- * set_falias - sets falias to string
+ * set_falias - sets valias to string
  * @finfo: parameter struct
- * @fstr: the string falias
+ * @fstr: the string valias
  *
  * Return: Always 0 on success, 1 on error
  */
@@ -54,12 +54,12 @@ int set_falias(finfo_a *finfo, char *fstr)
 		return (unset_falias(finfo, fstr));
 
 	unset_falias(finfo, fstr);
-	return (fadd_node_end(&((*finfo).falias), fstr, 0) == NULL);
+	return (fadd_node_end(&((*finfo).valias), fstr, 0) == NULL);
 }
 
 /**
- * print_falias - prints an falias string
- * @node: the falias node
+ * print_falias - prints an valias string
+ * @node: the valias node
  *
  * Return: Always 0 on success, 1 on error
  */

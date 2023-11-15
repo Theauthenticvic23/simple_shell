@@ -39,8 +39,8 @@ void set_finfo(finfo_a *finfo, char **av)
 			;
 		(*finfo).argc = i;
 
-		replace_falias(finfo);
-		replace_fvars(finfo);
+		replace_valias(finfo);
+		replace_cvars(finfo);
 	}
 }
 
@@ -62,8 +62,8 @@ void free_finfo(finfo_a *finfo, int all)
 			free_flist(&((*finfo).env));
 		if ((*finfo).history)
 			free_flist(&((*finfo).history));
-		if ((*finfo).falias)
-			free_flist(&((*finfo).falias));
+		if ((*finfo).valias)
+			free_flist(&((*finfo).valias));
 		ffree((*finfo).environ);
 			(*finfo).environ = NULL;
 		bfree((void **)(*finfo).cmd_buf);

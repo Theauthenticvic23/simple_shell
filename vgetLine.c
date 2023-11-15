@@ -1,4 +1,4 @@
-#include "fashell.h"
+#include "cyshell.h"
 
 /**
  * input_buf - buffers chained commands
@@ -66,10 +66,10 @@ ssize_t get_input(finfo_a *finfo)
 		j = i; /* init new iterator to current buf position */
 		f = buf + i; /* get pointer for return */
 
-		check_fchain(finfo, buf, &j, i, len);
+		check_vchain(finfo, buf, &j, i, len);
 		while (j < len) /* iterate to semicolon or end */
 		{
-			if (fchain(finfo, buf, &j))
+			if (vchain(finfo, buf, &j))
 				break;
 			j++;
 		}

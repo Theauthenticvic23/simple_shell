@@ -1,12 +1,12 @@
-#include "fashell.h"
+#include "cyshell.h"
 
 /**
- * flist_len - determines length of linked list
+ * Vlist_len - determines length of linked list
  * @h: pointer to first node
  *
  * Return: size of list
  */
-size_t flist_len(const list_t *h)
+size_t Vlist_len(const list_t *h)
 {
 	size_t i = 0;
 
@@ -27,7 +27,7 @@ size_t flist_len(const list_t *h)
 char **flist_to_strings(list_t *head)
 {
 	list_t *node = head;
-	size_t i = flist_len(head), j;
+	size_t i = Vlist_len(head), j;
 	char **strs;
 	char *fstr;
 

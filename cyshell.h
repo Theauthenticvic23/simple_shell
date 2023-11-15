@@ -1,5 +1,5 @@
-#ifndef FASHELL_H
-#define FASHELL_H
+#ifndef CYSHELL_H
+#define CYSHELL_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -64,7 +64,7 @@ typedef struct liststr
  *@env: linked list local copy of environ
  *@environ: custom modified copy of environ from LL env
  *@history: the history node
- *@falias: the falias node
+ *@valias: the valias node
  *@env_changed: on if environ was changed
  *@status: the return status of the last exec'd command
  *@cmd_buf: address of pointer to cmd_buf, on if chaining
@@ -84,7 +84,7 @@ typedef struct passinfo
 	char *fname;
 	list_t *env;
 	list_t *history;
-	list_t *falias;
+	list_t *valias;
 	char **environ;
 	int env_changed;
 	int status;
@@ -183,7 +183,7 @@ void clear_finfo(finfo_a *);
 void set_finfo(finfo_a *, char **);
 void free_finfo(finfo_a *, int);
 
-/* fenv.c */
+/* venv.c */
 char *_fgetenv(finfo_a *, const char *);
 int _fenv(finfo_a *);
 int _fmsetenv(finfo_a *);
@@ -210,17 +210,17 @@ int fdelete_node_at_ind(list_t **, unsigned int);
 void free_flist(list_t **);
 
 /* flists2.c */
-size_t flist_len(const list_t *);
+size_t Vlist_len(const list_t *);
 char **flist_to_strings(list_t *);
 size_t _fprintlist(const list_t *);
 list_t *fnode_starts_with(list_t *, char *, char);
 ssize_t get_node_ind(list_t *, list_t *);
 
-/* fchain.c */
-int fchain(finfo_a *, char *, size_t *);
-void check_fchain(finfo_a *, char *, size_t *, size_t, size_t);
-int replace_falias(finfo_a *);
-int replace_fvars(finfo_a *);
-int replace_fstring(char **, char *);
+/* vchain.c */
+int vchain(finfo_a *, char *, size_t *);
+void check_vchain(finfo_a *, char *, size_t *, size_t, size_t);
+int replace_valias(finfo_a *);
+int replace_cvars(finfo_a *);
+int replace_vstring(char **, char *);
 
-#endif /* FASHELL_H */
+#endif /* CYSHELL_H */
